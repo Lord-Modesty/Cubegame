@@ -6,10 +6,10 @@ var gewinn_gerade;
 var verloren = 0;
 var gewonnen = 0;
 
-function würfeln() {
+function wuerfeln() {
 	setGuthaben();
 	if (Guthaben <= 0) {
-		$(location).attr('href', 'end.html');
+		$(location).attr('href', 'end.php');
 	} else if (gesetzt == null) {
 		alert("Auf was wollen Sie setzen?");
 	} else {

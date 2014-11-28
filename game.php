@@ -1,3 +1,22 @@
+<?php
+	/*session_start();
+   
+    if(!isset($_SESSION['filledFormular']) && !isset($_SESSION['filledGame'])) {
+        header('location: index.php');
+    }
+    else
+    {
+
+        if($_SESSION['filledFormular'] == 'false') {
+				 header('location: index.php');
+			} else if($_SESSION['filledGame'] == 'false') {
+				//Nothing
+			} else {
+				header('location: end.php');
+			}
+    }*/
+		
+?>
 <!DOCTYPE html>
 <html lang="de">
 
@@ -9,8 +28,7 @@
 		<link rel="shortcut icon" type="image/x-icon" href="cubeicon.png">
 		
 		<!-- Bootstrap -->
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.0/paper/bootstrap.min.css" rel="stylesheet">
 
 	</head>
 
@@ -35,10 +53,10 @@
 								Einsatz x6 : Zahl
 							</li>
 							<li>
-								Einsatz x3 : Gerade/Ungerade Zahl
+								Einsatz x3 : Farbe, Rot(1,2) Lila(3,4) Orange(5,6)
 							</li>
 							<li>
-								Einsatz x2 : Farbe, Rot(1,2) Lila(3,4) Orange(5,6)
+								Einsatz x2 : Gerade/Ungerade Zahl
 							</li>
 						</ul>
 					</div>
@@ -107,7 +125,7 @@
 									<a onclick="setBet('Ungerade')" class="btn btn-default">Ungerade</a>
 								</li>
 							</ul>
-							<a onclick="würfeln()" class="btn btn-success">Würfeln</a>
+							<a onclick="wuerfeln()" class="btn btn-success">Würfeln</a>
 						</div>
 					</div>
 				</div>
@@ -134,11 +152,12 @@
 			</div>
 		</footer>
 
-		<script type="text/javascript" src="game.js"></script>
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+		
+		<script type="text/javascript" src="game.js"></script>
 
 	</body>
 

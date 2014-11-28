@@ -1,3 +1,22 @@
+<?php
+/*	session_start();
+   
+    if(!isset($_SESSION['filledFormular']) && !isset($_SESSION['filledGame'])) {
+        header('location: index.php');
+    }
+    else
+    {
+
+        if($_SESSION['filledFormular'] == 'false') {
+				 header('location: index.php');
+			} else if($_SESSION['filledGame'] == 'false') {
+				header('location: game.php');
+			} else {
+				//Nothing
+			}
+    }*/
+
+?>
 <!DOCTYPE html>
 <html lang="de">
 
@@ -9,8 +28,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 		<!-- Bootstrap -->
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.0/paper/bootstrap.min.css" rel="stylesheet">
 
 	</head>
 
@@ -27,11 +45,12 @@
 
 		</section>
 
-		<script type="text/javascript" src="game.js"></script>
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-		<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
+		
+		<script type="text/javascript" src="game.js"></script>
 
 	</body>
 
