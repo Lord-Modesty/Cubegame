@@ -9,6 +9,8 @@ var gewonnen = 0;
 var player_id = $('#player_id').val();
 
 function wuerfeln() {
+    runde = runde + 1;
+	
     setGuthaben();
 	winCheck();
 	
@@ -17,7 +19,6 @@ function wuerfeln() {
     } else if (gesetzt == null) {
         alert("Auf was wollen Sie setzen?");
     } else {
-        runde = runde + 1;
         winNumber = Math.floor((Math.random() * 6) + 1)
         switch (winNumber) {
         case (1):
