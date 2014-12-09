@@ -1,13 +1,13 @@
 <?php
 
 session_start();
-if(isset($_SESSION['gameReached'])){
-      
+if(!isset($_SESSION['gameReached'])){
+    header('location: index.php');
 }else if(isset($_SESSION['endReached'])){
     header('location: end.php');
 }
 else{
-  header('location: index.php');
+  
 }
 ?>
 <!DOCTYPE html>
