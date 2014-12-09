@@ -176,8 +176,12 @@ function setEinsatzvalue(einsatz) {
 };
 
 function ajaxFunction() {
+    // Disable the play button, to prevent lost games because the unfinished
+    // AJAX request could get cancelled by the quickly started new game
+    $("#play").attr("disabled", "disabled");
+    
     var ajaxRequest; // The variable that makes Ajax possible!
-
+    
     try {
         // Opera 8.0+, Firefox, Safari
         ajaxRequest = new XMLHttpRequest();
@@ -216,7 +220,9 @@ function ajaxFunction() {
         "&verloren=" + verloren+ 
         "&gewonnen=" + gewonnen+ 
         "&player_id=" + player_id;
-    ajaxRequest.open("GET", "game_script.php" +
-        queryValues, true);
+    ajaxRequest.open("GET", "game_script.php" + queryValues, false);
     ajaxRequest.send(null);
+    
+    // Re-enable the play button
+	$("#play").removeAttr("disabled");
 }

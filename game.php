@@ -119,8 +119,7 @@ session_start();
 									<a onclick="setBet('Ungerade')" class="btn btn-default">Ungerade</a>
 								</li>
 							</ul>
-							<a onclick="wuerfeln()" class="btn btn-success pull-right">Würfeln</a>
-						
+							<a id="play" class="btn btn-success pull-right" onclick="wuerfeln()">Würfeln</a>
 					</div>
 				</div>
 
