@@ -1,5 +1,0 @@
-$File = "log.txt";
-    $Handle = fopen($File, 'a');
-    $Data = "player_id " . $player_id;
-        fwrite($Handle, $Data);
-    fclose($Handle);
