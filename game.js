@@ -187,7 +187,6 @@ function ajaxFunction() {
     
     
     var ajaxRequest; // The variable that makes Ajax possible!
-    
     try {
         // Opera 8.0+, Firefox, Safari
         ajaxRequest = new XMLHttpRequest();
@@ -205,7 +204,15 @@ function ajaxFunction() {
             }
         }
     }
-
+    
+    // Re-enable the play and bet buttons when the AJAX request is completed
+    ajaxRequest.onreadystatechange = function () {
+        if (ajaxRequest.readyState == 4) {
+            $("#play").removeAttr("disabled");
+            $("#bet").removeAttr("disabled");
+        }
+    }
+    
     // Now get the value from user and pass it to
     // server script.
     var queryValues = "?runde=" + runde + 
@@ -219,8 +226,4 @@ function ajaxFunction() {
         "&player_id=" + player_id;
     ajaxRequest.open("GET", "game_script.php" + queryValues, false);
     ajaxRequest.send(null);
-    
-    // Re-enable the play and bet buttons	
-    $("#play").removeAttr("disabled");
-    $("#bet").removeAttr("disabled");
 }
