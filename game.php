@@ -1,14 +1,14 @@
 <?php
 
 session_start();
-if(!isset($_SESSION['gameReached'])){
-    header('location: index.php');
-}else if(isset($_SESSION['endReached'])){
-    header('location: end.php');
-}
-else{
-  
-}
+//if(!isset($_SESSION['gameReached'])){
+//    header('location: index.php');
+//}else if(isset($_SESSION['endReached'])){
+//    header('location: end.php');
+//}
+//else{
+//  
+//}
 ?>
 <!DOCTYPE html>
 <html lang="de">

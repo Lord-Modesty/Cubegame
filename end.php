@@ -1,10 +1,10 @@
 <?php session_start();
-if(isset($_SESSION['gewonnen'])){
-    $_SESSION['reachedEnd'] = true;
-}
-else{
-    header('location: game.php');
-}
+//if(isset($_SESSION['gewonnen'])){
+//    $_SESSION['reachedEnd'] = true;
+//}
+//else{
+//    header('location: game.php');
+//}
 ?>
 <!DOCTYPE html>
 <html lang="de">
