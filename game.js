@@ -108,10 +108,10 @@ function winCheck() {
 };
 
 function setBet(value) {
-
     setEinsatzvalue(value);
     $('#einsatz').text("Auf : " + value);
-
+    
+    $("#play").removeAttr("disabled");
 };
 
 function setGuthaben() {
@@ -180,6 +180,11 @@ function ajaxFunction() {
     // AJAX request could get cancelled by the quickly started new game
     $("#play").attr("disabled", "disabled");
     
+    // Disable the bet button too, because changing it would
+    // re-enable the play button
+    $("#bet").attr("disabled", "disabled");
+    
+    
     var ajaxRequest; // The variable that makes Ajax possible!
     
     try {
@@ -199,18 +204,9 @@ function ajaxFunction() {
             }
         }
     }
-    // Create a function that will receive data 
-    // sent from the server and will update
-    // div section in the same page.
-    ajaxRequest.onreadystatechange = function () {
-        if (ajaxRequest.readyState == 4) {
-            var ajaxDisplay = document.getElementById('ajaxDiv');
-            ajaxDisplay.innerHTML = ajaxRequest.responseText;
-        }
-    }
+
     // Now get the value from user and pass it to
     // server script.
-   
     var queryValues = "?runde=" + runde + 
         "&guthaben=" + Guthaben + 
         "&gesetzt=" + gesetzt + 
@@ -223,6 +219,7 @@ function ajaxFunction() {
     ajaxRequest.open("GET", "game_script.php" + queryValues, false);
     ajaxRequest.send(null);
     
-    // Re-enable the play button
-	$("#play").removeAttr("disabled");
+    // Re-enable the play and bet buttons	
+    $("#play").removeAttr("disabled");
+    $("#bet").removeAttr("disabled");
 }
