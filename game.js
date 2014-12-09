@@ -10,6 +10,8 @@ var player_id = $('#player_id').val();
 
 function wuerfeln() {
     setGuthaben();
+	winCheck();
+	
     if (Guthaben <= 0) {
         $(location).attr('href', 'end.php');
     } else if (gesetzt == null) {
@@ -74,15 +76,10 @@ function wuerfeln() {
             break;
 
         }
-
-        winCheck();
-
     };
-
 };
 
 function winCheck() {
-
     if (gewinn_zahl == gesetzt) {
         gewonnen = gewonnen + 6;
         $('#statustext').addClass('text-success').removeClass('text-danger');
@@ -108,7 +105,6 @@ function winCheck() {
     }
     
     ajaxFunction();
-
 };
 
 function setBet(value) {
