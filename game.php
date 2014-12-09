@@ -44,13 +44,13 @@ session_start();
 						</p>
 						<ul>
 							<li>
-								Einsatz x6 : Zahl
+								Setze auf Zahl: Gewinn = Einsatz x6
 							</li>
 							<li>
-								Einsatz x3 : Farbe, Rot(1,2) Lila(3,4) Orange(5,6)
+								Setze auf Farbe: Gewinn = Einsatz x3
 							</li>
 							<li>
-								Einsatz x2 : Gerade/Ungerade Zahl
+								Setze auf gerade/ ungerade: Gewinn = Einsatz x2
 							</li>
 						</ul>
 					</div>
