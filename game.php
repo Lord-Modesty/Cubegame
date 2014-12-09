@@ -1,21 +1,14 @@
 <?php
-	/*session_start();
-   
-    if(!isset($_SESSION['filledFormular']) && !isset($_SESSION['filledGame'])) {
-        header('location: index.php');
-    }
-    else
-    {
 
-        if($_SESSION['filledFormular'] == 'false') {
-				 header('location: index.php');
-			} else if($_SESSION['filledGame'] == 'false') {
-				//Nothing
-			} else {
-				header('location: end.php');
-			}
-    }*/
-		
+session_start();
+if(isset($_SESSION['gameReached'])){
+      
+}else if(isset($_SESSION['endReached'])){
+    header('location: end.php');
+}
+else{
+  header('location: index.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -39,6 +32,7 @@
 				<div class="row">
 					<div class="col-lg-12 text-center">
 						<h1>Würfelspiel</h1>
+                         <input id="player_id" type="hidden" name="UserBrowser" value="<?php echo $_SESSION['player_id'] ?>">
 					</div>
 				</div>
 
@@ -64,17 +58,17 @@
 
 				<div class="row">
 					<div class="col-md-4 col-md-offset-4">
-						<h3>Guthaben:<span id="guthaben" class="label label-success">10.-</span></h3>
+						<h3>Guthaben:<span id="guthaben" class="label label-success pull-right">10.-</span></h3>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-4 col-md-offset-4">
-						<h4>Gewonnen:<span id="gewonnen" class="label label-primary">0.-</span></h4>
+						<h4>Gewonnen:<span id="gewonnen" class="label label-primary pull-right">0.-</span></h4>
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-4 col-md-offset-4">
-						<h4>Verloren:<span id="verloren" class="label label-danger">0.-</span></h4>
+						<h4>Verloren:<span id="verloren" class="label label-danger pull-right">0.-</span></h4>
 					</div>
 				</div>
 
@@ -86,7 +80,7 @@
 							<span class="badge">2 </span>Würfeln!
 							<br />
 						</p>
-						<div class="btn-group">
+						
 							<a id="einsatz" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Auf : <span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li>
@@ -125,8 +119,8 @@
 									<a onclick="setBet('Ungerade')" class="btn btn-default">Ungerade</a>
 								</li>
 							</ul>
-							<a onclick="wuerfeln()" class="btn btn-success">Würfeln</a>
-						</div>
+							<a onclick="wuerfeln()" class="btn btn-success pull-right">Würfeln</a>
+						
 					</div>
 				</div>
 

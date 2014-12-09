@@ -6,6 +6,7 @@ var gewinn_farbe;
 var gewinn_gerade;
 var verloren = 0;
 var gewonnen = 0;
+var player_id = $('#player_id').val();
 
 function wuerfeln() {
     setGuthaben();
@@ -209,6 +210,7 @@ function ajaxFunction() {
     }
     // Now get the value from user and pass it to
     // server script.
+   
     var queryValues = "?runde=" + runde + 
         "&guthaben=" + Guthaben + 
         "&gesetzt=" + gesetzt + 
@@ -216,7 +218,8 @@ function ajaxFunction() {
         "&gewinn_farbe=" + gewinn_farbe + 
         "&gewinn_gerade=" + gewinn_gerade + 
         "&verloren=" + verloren+ 
-        "&gewonnen=" + gewonnen;
+        "&gewonnen=" + gewonnen+ 
+        "&player_id=" + player_id;
     ajaxRequest.open("GET", "game_script.php" +
         queryValues, true);
     ajaxRequest.send(null);

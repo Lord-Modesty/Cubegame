@@ -1,4 +1,5 @@
-<?php /* session_start(); if(!isset($_SESSION[ 'filledFormular']) && !isset($_SESSION[ 'filledGame'])) { $_SESSION[ 'filledFormular']='false' ; $_SESSION[ 'filledGame']='false' ; } else { if($_SESSION[ 'filledFormular']=='false' ) { //Nothing } else if($_SESSION[ 'filledGame']=='false' ) { header( 'location: game.php'); } else { header( 'location: end.php'); } } */ ?>
+<?php session_start();
+?>
 <!DOCTYPE html>
 <html lang="de">
 
@@ -74,7 +75,7 @@
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <input type="number" step="5" class="form-control" placeholder="Gewicht in Kilogramm" name="gewicht" id="gewicht" required data-validation-required-message="Bitte geben Sie ihr Gewicht                                         an.">
+                                <input type="number" class="form-control" placeholder="Gewicht in Kilogramm" name="gewicht" id="gewicht" required data-validation-required-message="Bitte geben Sie ihr Gewicht an.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
@@ -94,7 +95,7 @@
                         <div id="success"></div>
                         <div class="row">
                             <div class="form-group col-xs-12">
-                                <button type="submit" class="btn btn-success btn-lg">
+                                <button type="submit" class="btn btn-success btn-lg put-right">
                                     Weiter
                                 </button>
                             </div>
