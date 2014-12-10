@@ -81,7 +81,7 @@ session_start();
 							<br />
 						</p>
 						
-							<a id="einsatz" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Auf: - <span class="caret"></span></a>
+							<a id="einsatz" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Auf : - <span class="caret"></span></a>
 							<ul id="bet" class="dropdown-menu">
 								<li>
 									<a onclick="setBet('1')" class="btn btn-default">1</a>
@@ -119,13 +119,13 @@ session_start();
 									<a onclick="setBet('Ungerade')" class="btn btn-default">Ungerade</a>
 								</li>
 							</ul>
-							<a id="play" class="btn btn-success pull-right" disabled="disabled" onclick="wuerfeln()">Würfeln</a>
+							<a id="play" class="btn btn-success pull-right" disabled="disabled" onclick="play()">Würfeln</a>
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col-md-4 col-md-offset-4">
-						<h2>Gewürfelt:<span id="cube" class="label label-default"></span></h2>
+						<h2>Gewürfelt: <span id="cube" class="label label-default"></span></h2>
 					</div>
 				</div>
 				
