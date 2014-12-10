@@ -60,7 +60,7 @@ function setBet(einsatz) {
 function play() {
     if (credit <= 0) {
         // All rounds played, redirect to the next page
-        window.location.replace('end.php');
+        window.location.replace('end_script.php');
     } else {
         credit -= 1;
         $('#guthaben').text(credit + ".-")
