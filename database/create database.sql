@@ -39,7 +39,6 @@ CREATE TABLE IF NOT EXISTS `leabergermaturaarbeit`.`games` (
   `gesetzt` INT NOT NULL,
   `gewinn_zahl` INT NOT NULL,
   `gewinn_farbe` INT NOT NULL,
-  `gewinn_gerade` INT NOT NULL,
   `verloren` INT NOT NULL,
   `gewonnen` INT NOT NULL,
   PRIMARY KEY (`game_id`),

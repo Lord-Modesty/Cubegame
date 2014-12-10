@@ -1,60 +1,12 @@
 var round = 1;
 var credit = 10;
 
-var gesetzt;
+var diceChoice;
 var winningNumber;
 var winningColor;
-var winningEven;
 
 var amountLost = 0;
 var amountWon = 0;
-
-
-function setBet(einsatz) {
-    // Update bet
-    switch (einsatz) {
-        case '1':
-            gesetzt = 1;
-            break;
-        case '2':
-            gesetzt = 2;
-            break;
-        case '3':
-            gesetzt = 3;
-            break;
-        case '4':
-            gesetzt = 4;
-            break;
-        case '5':
-            gesetzt = 5;
-            break;
-        case '6':
-            gesetzt = 6;
-            break;
-        case 'Rot':
-            gesetzt = 7;
-            break;
-        case 'Lila':
-            gesetzt = 8;
-            break;
-        case 'Orange':
-            gesetzt = 9;
-            break;
-        case 'Gerade':
-            gesetzt = 10;
-            break;
-        case 'Ungerade':
-            gesetzt = 11;
-            break;
-        default:
-            console.error("Encountered an unhandled bet choice");
-    }
-    
-    // Update UI
-    $('#einsatz').text("Auf : " + einsatz);
-    
-    $("#play").removeAttr("disabled");
-};
 
 
 function play() {
@@ -62,11 +14,11 @@ function play() {
         // All rounds played, redirect to the next page
         window.location.replace('end_script.php');
     } else {
+        rollTheDice();
+        checkForWin();
+        
         credit -= 1;
         $('#guthaben').text(credit + ".-")
-        
-        rollTheDice();
-        winCheck();
         
         sendRoundResultToServer();
         
@@ -78,68 +30,68 @@ function rollTheDice() {
     // Roll the dice
     winNumber = Math.floor((Math.random() * 6) + 1);
     
+    // Update UI
+    $("#cube").removeClass();
+    $('#cube').text(winNumber);
+    
     // Update winning numbers
     switch (winNumber) {
         case 1:
             winningNumber = 1;
             winningColor = 7;
-            winningEven = 11;
+            $("#cube").addClass('label label-danger');
             break;
-
+            
         case 2:
             winningNumber = 2;
             winningColor = 7;
-            winningEven = 10;
+            $("#cube").addClass('label label-danger');
             break;
-
+            
         case 3:
             winningNumber = 3;
             winningColor = 8;
-            winningEven = 11;
+            $("#cube").addClass('label label-info');
             break;
-
+            
         case 4:
             winningNumber = 4;
             winningColor = 8;
-            winningEven = 10;
+            $("#cube").addClass('label label-info');
             break;
-
+            
         case 5:
             winningNumber = 5;
             winningColor = 9;
-            winningEven = 11;
+            $("#cube").addClass('label label-warning');
             break;
-
+            
         case 6:
             winningNumber = 6;
             winningColor = 9;
-            winningEven = 10;
+            $("#cube").addClass('label label-warning');
             break;
-        
+            
         default:
             console.error("Encountered an unhandled dice value");
     }
-    
-    // Update UI
-    $("#cube").removeClass();
-    $("#cube").addClass('label label-default');
-    $('#cube').text(winNumber);
 }
 
-function winCheck() {
-    if (winningNumber == gesetzt) {
+function checkForWin() {
+    if (diceChoice == winningNumber) {
         amountWon += 6;
         $('#statustext').addClass('text-success').removeClass('text-danger');
         $('#statustext').text("Gewonnen!");
         $('#gewonnen').text(amountWon + ".-");
-    
-    } else if (winningColor == gesetzt) {
+        
+    } else if (diceChoice == winningColor) {
         amountWon += 3;
         $('#statustext').addClass('text-success').removeClass('text-danger');
         $('#statustext').text("Gewonnen!");
         $('#gewonnen').text(amountWon + ".-");
-    
-    } else if (winningEven == gesetzt) {
+        
+    } else if ((diceChoice == 10 && winningNumber % 2 == 0) ||
+               (diceChoice == 11 && winningNumber % 2 != 0)) {
         amountWon += 2;
         $('#statustext').addClass('text-success').removeClass('text-danger');
         $('#statustext').text("Gewonnen!");
@@ -151,6 +103,55 @@ function winCheck() {
         $('#statustext').text("Verloren!");
         $('#verloren').text(amountLost + ".-");
     }
+};
+
+
+function setDiceChoice(newChoice) {
+    // Update dice choice
+    switch (newChoice) {
+        case '1':
+            diceChoice = 1;
+            break;
+        case '2':
+            diceChoice = 2;
+            break;
+        case '3':
+            diceChoice = 3;
+            break;
+        case '4':
+            diceChoice = 4;
+            break;
+        case '5':
+            diceChoice = 5;
+            break;
+        case '6':
+            diceChoice = 6;
+            break;
+            
+        case 'Rot':
+            diceChoice = 7;
+            break;
+        case 'Lila':
+            diceChoice = 8;
+            break;
+        case 'Orange':
+            diceChoice = 9;
+            
+            break;
+        case 'Gerade':
+            diceChoice = 10;
+            break;
+        case 'Ungerade':
+            diceChoice = 11;
+            break;
+        default:
+            console.error("Encountered an unhandled bet choice");
+    }
+    
+    // Update UI
+    $('#einsatz').text("Auf : " + newChoice);
+    
+    $("#play").removeAttr("disabled");
 };
 
 
@@ -169,10 +170,9 @@ function sendRoundResultToServer() {
     
     var httpParameters = "?runde=" + round + 
       "&guthaben=" + credit + 
-      "&gesetzt=" + gesetzt + 
+      "&gesetzt=" + diceChoice + 
       "&gewinn_zahl=" + winningNumber + 
       "&gewinn_farbe=" + winningColor + 
-      "&gewinn_gerade=" + winningEven + 
       "&verloren=" + amountLost + 
       "&gewonnen=" + amountWon + 
       "&player_id=" + playerId;
@@ -185,7 +185,7 @@ function sendRoundResultToServer() {
         .error(function (xhr, status, error) {
             console.error('Failed to send round result to server (' + status + '): ' + xhr.responseText);
             
-            // TODO: Ask for error alert message content
+            // TODO: Ask how to handle this kind of error
             alert("Beim Übermitteln des Rundenergebnisses zum Server ist ein Fehler aufgetreten!\n" + 
                   "Bitte überprüfen Sie Ihre Internetverbindung.");
         })

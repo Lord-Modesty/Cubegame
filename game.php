@@ -91,39 +91,39 @@
                         <a id="einsatz" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Auf : - <span class="caret"></span></a>
                         <ul id="bet" class="dropdown-menu">
                             <li>
-                                <a onclick="setBet('1')" class="btn btn-default">1</a>
+                                <a onclick="setDiceChoice('1')" class="btn btn-default">1</a>
                             </li>
                             <li>
-                                <a onclick="setBet('2')" class="btn btn-default">2</a>
+                                <a onclick="setDiceChoice('2')" class="btn btn-default">2</a>
                             </li>
                             <li>
-                                <a onclick="setBet('3')" class="btn btn-default">3</a>
+                                <a onclick="setDiceChoice('3')" class="btn btn-default">3</a>
                             </li>
                             <li>
-                                <a onclick="setBet('4')" class="btn btn-default">4</a>
+                                <a onclick="setDiceChoice('4')" class="btn btn-default">4</a>
                             </li>
                             <li>
-                                <a onclick="setBet('5')" class="btn btn-default">5</a>
+                                <a onclick="setDiceChoice('5')" class="btn btn-default">5</a>
                             </li>
                             <li>
-                                <a onclick="setBet('6')" class="btn btn-default">6</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a onclick="setBet('Rot')" class="btn btn-default">Rot</a>
-                            </li>
-                            <li>
-                                <a onclick="setBet('Lila')" class="btn btn-default">Lila</a>
-                            </li>
-                            <li>
-                                <a onclick="setBet('Orange')" class="btn btn-default">Orange</a>
+                                <a onclick="setDiceChoice('6')" class="btn btn-default">6</a>
                             </li>
                             <li class="divider"></li>
                             <li>
-                                <a onclick="setBet('Gerade')" class="btn btn-default">Gerade</a>
+                                <a onclick="setDiceChoice('Rot')" class="btn btn-default">Rot</a>
                             </li>
                             <li>
-                                <a onclick="setBet('Ungerade')" class="btn btn-default">Ungerade</a>
+                                <a onclick="setDiceChoice('Lila')" class="btn btn-default">Lila</a>
+                            </li>
+                            <li>
+                                <a onclick="setDiceChoice('Orange')" class="btn btn-default">Orange</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a onclick="setDiceChoice('Gerade')" class="btn btn-default">Gerade</a>
+                            </li>
+                            <li>
+                                <a onclick="setDiceChoice('Ungerade')" class="btn btn-default">Ungerade</a>
                             </li>
                         </ul>
                         <a id="play" class="btn btn-success pull-right" disabled="disabled" onclick="play()">Würfeln</a>

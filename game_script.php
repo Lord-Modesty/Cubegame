@@ -2,15 +2,14 @@
     session_start();
     
     // Get user input
+    $playerId = $_GET['player_id'];
     $round = $_GET['runde'];
     $credit = $_GET['guthaben'];
     $gesetzt = $_GET['gesetzt'];
     $winningNumber = $_GET['gewinn_zahl'];
     $winningColor = $_GET['gewinn_farbe'];
-    $winningEven = $_GET['gewinn_gerade'];
     $amountLost = $_GET['verloren'];
     $amountWon = $_GET['gewonnen'];
-    $playerId = $_GET['player_id'];
     
     // Create a database connection
     $database = new mysqli('localhost', 'root', '', 'leabergermaturaarbeit') or
@@ -23,9 +22,9 @@
     
     // Insert a new round result
      if ($query = $database->prepare('INSERT INTO games ' .
-                                     '(runde, guthaben,  gesetzt, gewinn_zahl, gewinn_farbe,gewinn_gerade, verloren, gewonnen, player_id) ' .
-                                     'VALUES (?,?,?,?,?,?,?,?,?)')) {
-        $query->bind_param('iiiiiiiii', $round, $credit, $gesetzt, $winningNumber, $winningColor, $winningEven, $amountLost, $amountWon, $playerId);
+                                     '(player_id, runde, guthaben,  gesetzt, gewinn_zahl, gewinn_farbe, verloren, gewonnen) ' .
+                                     'VALUES (?, ?, ?, ?, ?, ?, ?, ?)')) {
+        $query->bind_param('iiiiiiii', $playerId, $round, $credit, $gesetzt, $winningNumber, $winningColor, $amountLost, $amountWon);
         $query->execute();
         $query->close();
     }
