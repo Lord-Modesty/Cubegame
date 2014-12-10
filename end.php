@@ -24,7 +24,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <title>Lea Berger | Umfrage</title>
+    <title>Ende | Maturitätsarbeit Lea Berger</title>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">

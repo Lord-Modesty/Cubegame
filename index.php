@@ -24,7 +24,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <title>Lea Berger | Umfrage</title>
+    <title>Maturitätsarbeit Lea Berger</title>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -62,49 +62,56 @@
                     <form name="sentMessage" id="contactForm" action="index_script.php" method="post">
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <input type="text" class="form-control" placeholder="Vorname" name="vorname" id="vorname" required data-validation-required-message="Bitte geben Sie ihr Geschlecht an.">
+                                <input name="vorname" id="vorname" type="text" class="form-control" placeholder="Vorname"
+                                  required maxlength="45" data-validation-required-message="Bitte geben Sie ihr Geschlecht an.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <input type="text" class="form-control" placeholder="Name" name="name" id="name" required data-validation-required-message="Bitte geben Sie ihr Geschlecht an.">
+                                <input name="name" id="name" type="text" class="form-control" placeholder="Name" 
+                                  required maxlength="45" data-validation-required-message="Bitte geben Sie ihr Geschlecht an.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <input type="text" class="form-control" placeholder="Klasse" name="klasse" id="klasse" required data-validation-required-message="Bitte geben Sie ihr Geschlecht an.">
+                                <input type="text" class="form-control" placeholder="Klasse" name="klasse" id="klasse" 
+                                  required maxlength="50" data-validation-required-message="Bitte geben Sie ihr Geschlecht an.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <input type="text" class="form-control" placeholder="Geschlecht" name="geschlecht" id="geschlecht" required data-validation-required-message="Bitte geben Sie ihr Geschlecht an.">
+                                <input type="text" class="form-control" placeholder="Geschlecht" name="geschlecht" id="geschlecht" 
+                                  required maxlength="50" data-validation-required-message="Bitte geben Sie ihr Geschlecht an.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <input type="number" class="form-control" placeholder="Alter" name="age" id="age" required data-validation-required-message="Bitte geben Sie ihr Alter an.">
+                                <input type="number" class="form-control" placeholder="Alter" name="age" id="age"
+                                  required maxlength="3" data-validation-required-message="Bitte geben Sie ihr Alter an.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <input type="number" class="form-control" placeholder="Gewicht in Kilogramm" name="gewicht" id="gewicht" required data-validation-required-message="Bitte geben Sie ihr Gewicht an.">
+                                <input type="number" class="form-control" placeholder="Gewicht in Kilogramm" name="gewicht" id="gewicht" 
+                                  required maxlength="3" data-validation-required-message="Bitte geben Sie ihr Gewicht an.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <input type="number" class="form-control" placeholder="Grösse in Centimeter" name="groesse" id="groesse" required data-validation-required-message="Bitte geben Sie ihr Grösse an.">
+                                <input type="number" class="form-control" placeholder="Grösse in Centimeter" name="groesse" id="groesse" 
+                                  required maxlength="3" data-validation-required-message="Bitte geben Sie ihr Grösse an.">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <input type="number"min="0" max="10" class="form-control" placeholder="Hunger von 0 bis 10 (0 = Kein Hunger 10 = sehr grossen Hunger)" name="hunger" id="hunger" required data-validation-required-                                    message="Bitte geben Sie ihren Hunger an." title="0 = Kein Hunger 10 = sehr grossen Hunger">
+                                <input type="number" min="0" max="10" class="form-control" placeholder="Hunger von 0 bis 10 (0 = Kein Hunger 10 = sehr grossen Hunger)" name="hunger" id="hunger" required data-validation-required-                                    message="Bitte geben Sie ihren Hunger an." title="0 = Kein Hunger 10 = sehr grossen Hunger">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
