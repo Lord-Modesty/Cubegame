@@ -29,7 +29,7 @@
         $query->close();
     }
     else {
-        exit('Fehler: ' . mysqli_connect_error());
+        exit('Fehler: ' . $database->error);
     }
     
     // Retrieve the id of the newly created player

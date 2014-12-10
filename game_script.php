@@ -22,7 +22,7 @@
     }
     
     // Insert a new round result
-     if ($query = $database->prepare('INSERT INTO game ' .
+     if ($query = $database->prepare('INSERT INTO games ' .
                                      '(runde, guthaben,  gesetzt, gewinn_zahl, gewinn_farbe,gewinn_gerade, verloren, gewonnen, player_id) ' .
                                      'VALUES (?,?,?,?,?,?,?,?,?)')) {
         $query->bind_param('iiiiiiiii', $round, $credit, $gesetzt, $winningNumber, $winningColor, $winningEven, $amountLost, $amountWon, $playerId);
@@ -30,7 +30,7 @@
         $query->close();
     }
     else {
-        exit('Fehler: ' . mysqli_connect_error());
+        exit('Fehler: ' . $database->error);
     }
     
     // Update the amount won
