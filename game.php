@@ -1,15 +1,23 @@
 <?php
-
-session_start();
-//if(!isset($_SESSION['gameReached'])){
-//    header('location: index.php');
-//}else if(isset($_SESSION['endReached'])){
-//    header('location: end.php');
-//}
-//else{
-//  
-//}
+    session_start();
+    
+    if(isset($_SESSION['playerProgress'])){
+        switch ($_SESSION['playerProgress']) {
+            case 0: // Not registered
+                header('Location: index.php');
+                break;
+            case 1: // Playing
+                // do nothing, this is the correct page
+                break;
+            case 2: // Done
+                header('Location: end.php');
+                break;
+            default:
+                // Assume this is the correct page
+        }
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="de">
 
@@ -32,7 +40,7 @@ session_start();
 				<div class="row">
 					<div class="col-lg-12 text-center">
 						<h1>Würfelspiel</h1>
-                         <input id="player_id" type="hidden" name="UserBrowser" value="<?php echo $_SESSION['player_id'] ?>">
+                         <input id="player_id" type="hidden" name="UserBrowser" value="<?php echo $_SESSION['playerId'] ?>">
 					</div>
 				</div>
 

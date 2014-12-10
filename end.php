@@ -1,11 +1,23 @@
-<?php session_start();
-//if(isset($_SESSION['gewonnen'])){
-//    $_SESSION['reachedEnd'] = true;
-//}
-//else{
-//    header('location: game.php');
-//}
+<?php
+    session_start();
+    
+    if(isset($_SESSION['playerProgress'])){
+        switch ($_SESSION['playerProgress']) {
+            case 0: // Not registered
+                header('Location: index.php');
+                break;
+            case 1: // Playing
+                header('Location: game.php');
+                break;
+            case 2: // Done
+                // do nothing, this is the correct page
+                break;
+            default:
+                // Assume this is the correct page
+        }
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="de">
 

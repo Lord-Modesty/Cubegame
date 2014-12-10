@@ -39,8 +39,8 @@
     $database->close();
     
     // Redirect to the next page
-    $_SESSION['player_id'] = $playerId;
-    $_SESSION['gameReached'] = true;
+    $_SESSION['playerId'] = $playerId;
+    $_SESSION['playerProgress'] = 1; // 0 = Not registered, 1 = Playing, 2 = Done
     
-    header('location: game.php');
+    header('Location: game.php');
 ?>
