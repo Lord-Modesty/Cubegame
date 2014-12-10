@@ -1,4 +1,4 @@
-var Guthaben = 10;
+var guthaben = 10;
 var runde = 0;
 var gesetzt;
 var gewinn_zahl;
@@ -11,13 +11,11 @@ var player_id = $('#player_id').val();
 function wuerfeln() {
     runde = runde + 1;
 	
-    setGuthaben();
+    updateGuthaben();
 	winCheck();
 	
-    if (Guthaben <= 0) {
+    if (guthaben <= 0) {
         $(location).attr('href', 'end.php');
-    } else if (gesetzt == null) {
-        alert("Auf was wollen Sie setzen?");
     } else {
         winNumber = Math.floor((Math.random() * 6) + 1)
         switch (winNumber) {
@@ -115,15 +113,9 @@ function setBet(value) {
     $("#play").removeAttr("disabled");
 };
 
-function setGuthaben() {
-    if (Guthaben <= 0) {
-        alert("Guthaben fertig");
-    } else if (gesetzt == null) {
-
-    } else {
-        Guthaben = Guthaben - 1;
-        $('#guthaben').text(Guthaben + ".-")
-    }
+function updateGuthaben() {
+    guthaben = guthaben - 1;
+    $('#guthaben').text(guthaben + ".-")
 };
 
 function setEinsatzvalue(einsatz) {
@@ -186,8 +178,9 @@ function sendRoundResultToServer() {
     $("#bet").attr("disabled", "disabled");
     
     
+    // Send the round result to the server
     var httpParameters = "?runde=" + runde + 
-      "&guthaben=" + Guthaben + 
+      "&guthaben=" + guthaben + 
       "&gesetzt=" + gesetzt + 
       "&gewinn_zahl=" + gewinn_zahl + 
       "&gewinn_farbe=" + gewinn_farbe + 
