@@ -105,7 +105,7 @@ function winCheck() {
         $('#verloren').text(verloren + ".-");
     }
     
-    ajaxFunction();
+    sendRoundResultToServer();
 };
 
 function setBet(value) {
@@ -176,7 +176,7 @@ function setEinsatzvalue(einsatz) {
 
 };
 
-function ajaxFunction() {
+function sendRoundResultToServer() {
     // Disable the play button, to prevent lost games because the unfinished
     // AJAX request could get cancelled by the quickly started new game
     $("#play").attr("disabled", "disabled");
@@ -186,44 +186,30 @@ function ajaxFunction() {
     $("#bet").attr("disabled", "disabled");
     
     
-    var ajaxRequest; // The variable that makes Ajax possible!
-    try {
-        // Opera 8.0+, Firefox, Safari
-        ajaxRequest = new XMLHttpRequest();
-    } catch (e) {
-        // Internet Explorer Browsers
-        try {
-            ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
-        } catch (e) {
-            try {
-                ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
-            } catch (e) {
-                // Something went wrong
-                alert("Your browser broke!");
-                return false;
-            }
-        }
-    }
-    
-    // Re-enable the play and bet buttons when the AJAX request is completed
-    ajaxRequest.onreadystatechange = function () {
-        if (ajaxRequest.readyState == 4) {
+    var httpParameters = "?runde=" + runde + 
+      "&guthaben=" + Guthaben + 
+      "&gesetzt=" + gesetzt + 
+      "&gewinn_zahl=" + gewinn_zahl + 
+      "&gewinn_farbe=" + gewinn_farbe + 
+      "&gewinn_gerade=" + gewinn_gerade + 
+      "&verloren=" + verloren+ 
+      "&gewonnen=" + gewonnen+ 
+      "&player_id=" + player_id;
+      
+    $.ajax('game_script.php' + httpParameters)
+        .done(function (data) {
+            console.log("Round result successfully sent to server");
+        })
+        .error(function (xhr, status, error) {
+            console.error('Failed to send round result to server (' + status + '): ' + xhr.responseText);
+            
+            // TODO: Ask for error alert message content
+            alert("Beim Übermitteln des Rundenergebnisses zum Server ist ein Fehler aufgetreten!\n" + 
+                  "Bitte überprüfen Sie Ihre Internetverbindung.");
+        })
+        .always (function () {
+            // Re-enable the play and bet buttons
             $("#play").removeAttr("disabled");
             $("#bet").removeAttr("disabled");
-        }
-    }
-    
-    // Now get the value from user and pass it to
-    // server script.
-    var queryValues = "?runde=" + runde + 
-        "&guthaben=" + Guthaben + 
-        "&gesetzt=" + gesetzt + 
-        "&gewinn_zahl=" + gewinn_zahl + 
-        "&gewinn_farbe=" + gewinn_farbe + 
-        "&gewinn_gerade=" + gewinn_gerade + 
-        "&verloren=" + verloren+ 
-        "&gewonnen=" + gewonnen+ 
-        "&player_id=" + player_id;
-    ajaxRequest.open("GET", "game_script.php" + queryValues, false);
-    ajaxRequest.send(null);
+        });
 }
