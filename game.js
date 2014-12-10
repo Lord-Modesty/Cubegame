@@ -1,12 +1,14 @@
-var guthaben = 10;
-var runde = 0;
+var round = 1;
+var credit = 10;
+
 var gesetzt;
-var gewinn_zahl;
-var gewinn_farbe;
-var gewinn_gerade;
-var verloren = 0;
-var gewonnen = 0;
-var player_id = $('#player_id').val();
+var winningNumber;
+var winningColor;
+var winningEven;
+
+var amountLost = 0;
+var amountWon = 0;
+
 
 function setBet(einsatz) {
     // Update bet
@@ -56,18 +58,19 @@ function setBet(einsatz) {
 
 
 function play() {
-    if (guthaben <= 0) {
+    if (credit <= 0) {
         // All rounds played, redirect to the next page
-        $(location).attr('href', 'end.php');
+        window.location.replace('end.php');
     } else {
-        // Play a round
-        runde = runde + 1;
-	    
-        guthaben = guthaben - 1;
-        $('#guthaben').text(guthaben + ".-")
+        credit -= 1;
+        $('#guthaben').text(credit + ".-")
         
         rollTheDice();
         winCheck();
+        
+        sendRoundResultToServer();
+        
+        round += 1;
     };
 };
 
@@ -78,39 +81,39 @@ function rollTheDice() {
     // Update winning numbers
     switch (winNumber) {
         case 1:
-            gewinn_zahl = 1;
-            gewinn_farbe = 7;
-            gewinn_gerade = 11;
+            winningNumber = 1;
+            winningColor = 7;
+            winningEven = 11;
             break;
 
         case 2:
-            gewinn_zahl = 2;
-            gewinn_farbe = 7;
-            gewinn_gerade = 10;
+            winningNumber = 2;
+            winningColor = 7;
+            winningEven = 10;
             break;
 
         case 3:
-            gewinn_zahl = 3;
-            gewinn_farbe = 8;
-            gewinn_gerade = 11;
+            winningNumber = 3;
+            winningColor = 8;
+            winningEven = 11;
             break;
 
         case 4:
-            gewinn_zahl = 4;
-            gewinn_farbe = 8;
-            gewinn_gerade = 10;
+            winningNumber = 4;
+            winningColor = 8;
+            winningEven = 10;
             break;
 
         case 5:
-            gewinn_zahl = 5;
-            gewinn_farbe = 9;
-            gewinn_gerade = 11;
+            winningNumber = 5;
+            winningColor = 9;
+            winningEven = 11;
             break;
 
         case 6:
-            gewinn_zahl = 6;
-            gewinn_farbe = 9;
-            gewinn_gerade = 10;
+            winningNumber = 6;
+            winningColor = 9;
+            winningEven = 10;
             break;
         
         default:
@@ -124,31 +127,30 @@ function rollTheDice() {
 }
 
 function winCheck() {
-    if (gewinn_zahl == gesetzt) {
-        gewonnen = gewonnen + 6;
+    if (winningNumber == gesetzt) {
+        amountWon += 6;
         $('#statustext').addClass('text-success').removeClass('text-danger');
         $('#statustext').text("Gewonnen!");
-        $('#gewonnen').text(gewonnen + ".-");
-
-    } else if (gewinn_farbe == gesetzt) {
-        gewonnen = gewonnen + 3;
+        $('#gewonnen').text(amountWon + ".-");
+    
+    } else if (winningColor == gesetzt) {
+        amountWon += 3;
         $('#statustext').addClass('text-success').removeClass('text-danger');
         $('#statustext').text("Gewonnen!");
-        $('#gewonnen').text(gewonnen + ".-");
-
-    } else if (gewinn_gerade == gesetzt) {
-        gewonnen = gewonnen + 2;
+        $('#gewonnen').text(amountWon + ".-");
+    
+    } else if (winningEven == gesetzt) {
+        amountWon += 2;
         $('#statustext').addClass('text-success').removeClass('text-danger');
         $('#statustext').text("Gewonnen!");
-        $('#gewonnen').text(gewonnen + ".-");
+        $('#gewonnen').text(amountWon + ".-");
+        
     } else {
-        verloren = verloren + 1;
+        amountLost += 1;
         $('#statustext').addClass('text-danger').removeClass('text-success');
         $('#statustext').text("Verloren!");
-        $('#verloren').text(verloren + ".-");
+        $('#verloren').text(amountLost + ".-");
     }
-    
-    sendRoundResultToServer();
 };
 
 
@@ -163,15 +165,17 @@ function sendRoundResultToServer() {
     
     
     // Build HTTP parameter string
-    var httpParameters = "?runde=" + runde + 
-      "&guthaben=" + guthaben + 
+    var playerId = $('#player_id').val();
+    
+    var httpParameters = "?runde=" + round + 
+      "&guthaben=" + credit + 
       "&gesetzt=" + gesetzt + 
-      "&gewinn_zahl=" + gewinn_zahl + 
-      "&gewinn_farbe=" + gewinn_farbe + 
-      "&gewinn_gerade=" + gewinn_gerade + 
-      "&verloren=" + verloren+ 
-      "&gewonnen=" + gewonnen+ 
-      "&player_id=" + player_id;
+      "&gewinn_zahl=" + winningNumber + 
+      "&gewinn_farbe=" + winningColor + 
+      "&gewinn_gerade=" + winningEven + 
+      "&verloren=" + amountLost + 
+      "&gewonnen=" + amountWon + 
+      "&player_id=" + playerId;
     
     // Send the round result to the server
     $.ajax('game_script.php' + httpParameters)
