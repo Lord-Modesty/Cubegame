@@ -81,7 +81,7 @@ session_start();
 							<br />
 						</p>
 						
-							<a id="einsatz" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Auf : <span class="caret"></span></a>
+							<a id="einsatz" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Auf: - <span class="caret"></span></a>
 							<ul id="bet" class="dropdown-menu">
 								<li>
 									<a onclick="setBet('1')" class="btn btn-default">1</a>

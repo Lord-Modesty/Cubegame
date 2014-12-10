@@ -106,9 +106,48 @@ function winCheck() {
     sendRoundResultToServer();
 };
 
-function setBet(value) {
-    setEinsatzvalue(value);
-    $('#einsatz').text("Auf : " + value);
+function setBet(einsatz) {
+    // Update bet
+    switch (einsatz) {
+        case '1':
+            gesetzt = 1;
+            break;
+        case '2':
+            gesetzt = 2;
+            break;
+        case '3':
+            gesetzt = 3;
+            break;
+        case '4':
+            gesetzt = 4;
+            break;
+        case '5':
+            gesetzt = 5;
+            break;
+        case '6':
+            gesetzt = 6;
+            break;
+        case 'Rot':
+            gesetzt = 7;
+            break;
+        case 'Lila':
+            gesetzt = 8;
+            break;
+        case 'Orange':
+            gesetzt = 9;
+            break;
+        case 'Gerade':
+            gesetzt = 10;
+            break;
+        case 'Ungerade':
+            gesetzt = 11;
+            break;
+        default:
+            console.error("Tried to set the bet to an invalid value");
+    }
+    
+    // Update UI
+    $('#einsatz').text("Auf: " + einsatz);
     
     $("#play").removeAttr("disabled");
 };
@@ -116,56 +155,6 @@ function setBet(value) {
 function updateGuthaben() {
     guthaben = guthaben - 1;
     $('#guthaben').text(guthaben + ".-")
-};
-
-function setEinsatzvalue(einsatz) {
-
-    switch (einsatz) {
-    case ('1'):
-        gesetzt = 1;
-        break;
-
-    case ('2'):
-        gesetzt = 2;
-        break;
-
-    case ('3'):
-        gesetzt = 3;
-        break;
-
-    case ('4'):
-        gesetzt = 4;
-        break;
-
-    case ('5'):
-        gesetzt = 5;
-        break;
-
-    case ('6'):
-        gesetzt = 6;
-        break;
-
-    case ('Rot'):
-        gesetzt = 7;
-        break;
-
-    case ('Lila'):
-        gesetzt = 8;
-        break;
-
-    case ('Orange'):
-        gesetzt = 9;
-        break;
-
-    case ('Gerade'):
-        gesetzt = 10;
-        break;
-
-    case ('Ungerade'):
-        gesetzt = 11;
-        break;
-    }
-
 };
 
 function sendRoundResultToServer() {
@@ -178,7 +167,7 @@ function sendRoundResultToServer() {
     $("#bet").attr("disabled", "disabled");
     
     
-    // Send the round result to the server
+    // Build HTTP parameter string
     var httpParameters = "?runde=" + runde + 
       "&guthaben=" + guthaben + 
       "&gesetzt=" + gesetzt + 
@@ -188,7 +177,8 @@ function sendRoundResultToServer() {
       "&verloren=" + verloren+ 
       "&gewonnen=" + gewonnen+ 
       "&player_id=" + player_id;
-      
+    
+    // Send the round result to the server
     $.ajax('game_script.php' + httpParameters)
         .done(function (data) {
             console.log("Round result successfully sent to server");
