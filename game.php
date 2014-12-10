@@ -16,6 +16,9 @@
                 // Assume this is the correct page
         }
     }
+    else {
+        header('Location: index.php');
+    }
 ?>
 
 <!DOCTYPE html>

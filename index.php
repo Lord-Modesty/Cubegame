@@ -16,6 +16,9 @@
                 // Assume this is the correct page
         }
     }
+    else {
+        // do nothing, this is the correct page
+    }
 ?>
 
 <!DOCTYPE html>
