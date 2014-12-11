@@ -32,25 +32,32 @@
     
     <!-- Style -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.0/paper/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <section>
+    <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h1>Vielen Dank!</h1>
             </div>
         </div>
+        <br />
         <div class="row">
             <div class="col-lg-12 text-center">
-                <legend>
-                    <h1>Gewonnen: <span id="guthaben" class="label label-success"><?php echo $_SESSION['gewonnen'] ?>.-</span></h1></br>
-                </legend>
+                <p class="text text-big">
+                    Glückwunsch, Sie haben <span class="label label-success"><?php echo $_SESSION['gewonnen'] ?>.-</span> Gewonnen!
+                </p>
+                <p class="text text-medium">
+                    Ihre Resultate wurden gespeichert.
+                </p>
             </div>
         </div>
-    </section>
+    </div>
     
-    <footer class="footer">
-        <div class="container text-center">
+    <footer class="footer container">
+        <br />
+        <div class="text-center">
             <p class="text-muted">
                 Created by Nicola Bischof
             </p>
