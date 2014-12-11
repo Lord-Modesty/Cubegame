@@ -1,226 +1,197 @@
-var Guthaben = 10;
-var runde = 0;
-var gesetzt;
-var gewinn_zahl;
-var gewinn_farbe;
-var gewinn_gerade;
-var verloren = 0;
-var gewonnen = 0;
-var player_id = $('#player_id').val();
+var round = 1;
+var credit = 10;
 
-function wuerfeln() {
-    setGuthaben();
-    if (Guthaben <= 0) {
-        $(location).attr('href', 'end.php');
-    } else if (gesetzt == null) {
-        alert("Auf was wollen Sie setzen?");
+var diceChoice;
+var winningNumber;
+var winningColor;
+
+var amountLost = 0;
+var amountWon = 0;
+
+
+function play() {
+    if (credit <= 0) {
+        // All rounds played, redirect to the next page
+        window.location.replace('end_script.php');
     } else {
-        runde = runde + 1;
-        winNumber = Math.floor((Math.random() * 6) + 1)
-        switch (winNumber) {
-        case (1):
-            $("#cube").removeClass();
-            $("#cube").addClass('label label-danger');
-            $('#cube').text(winNumber);
-            gewinn_zahl = 1;
-            gewinn_farbe = 7;
-            gewinn_gerade = 11;
-            break;
-
-        case (2):
-            $("#cube").removeClass();
-            $("#cube").removeClass();
-            $("#cube").addClass('label label-danger');
-            $('#cube').text(winNumber);
-            gewinn_zahl = 2;
-            gewinn_farbe = 7;
-            gewinn_gerade = 10;
-            break;
-
-        case (3):
-            $("#cube").removeClass();
-            $("#cube").addClass('label label-info');
-            $('#cube').text(winNumber);
-            gewinn_zahl = 3;
-            gewinn_farbe = 8;
-            gewinn_gerade = 11;
-            break;
-
-        case (4):
-            $("#cube").removeClass();
-            $("#cube").addClass('label label-info');
-            $('#cube').text(winNumber);
-            gewinn_zahl = 4;
-            gewinn_farbe = 8;
-            gewinn_gerade = 10;
-            break;
-
-        case (5):
-            $("#cube").removeClass();
-            $("#cube").addClass('label label-warning');
-            $('#cube').text(winNumber);
-            gewinn_zahl = 5;
-            gewinn_farbe = 9;
-            gewinn_gerade = 11;
-            break;
-
-        case (6):
-            $("#cube").removeClass();
-            $("#cube").addClass('label label-warning');
-            $('#cube').text(winNumber);
-            gewinn_zahl = 6;
-            gewinn_farbe = 9;
-            gewinn_gerade = 10;
-            break;
-
-        }
-
-        winCheck();
-
+        rollTheDice();
+        checkForWin();
+        
+        credit -= 1;
+        $('#guthaben').text(credit + ".-")
+        
+        sendRoundResultToServer();
+        
+        round += 1;
     };
-
 };
 
-function winCheck() {
+function rollTheDice() {
+    // Roll the dice
+    winNumber = Math.floor((Math.random() * 6) + 1);
+    
+    // Update UI
+    $("#cube").removeClass();
+    $('#cube').text(winNumber);
+    
+    // Update winning numbers
+    switch (winNumber) {
+        case 1:
+            winningNumber = 1;
+            winningColor = 7;
+            $("#cube").addClass('label label-danger');
+            break;
+            
+        case 2:
+            winningNumber = 2;
+            winningColor = 7;
+            $("#cube").addClass('label label-danger');
+            break;
+            
+        case 3:
+            winningNumber = 3;
+            winningColor = 8;
+            $("#cube").addClass('label label-info');
+            break;
+            
+        case 4:
+            winningNumber = 4;
+            winningColor = 8;
+            $("#cube").addClass('label label-info');
+            break;
+            
+        case 5:
+            winningNumber = 5;
+            winningColor = 9;
+            $("#cube").addClass('label label-warning');
+            break;
+            
+        case 6:
+            winningNumber = 6;
+            winningColor = 9;
+            $("#cube").addClass('label label-warning');
+            break;
+            
+        default:
+            console.error("Encountered an unhandled dice value");
+    }
+}
 
-    if (gewinn_zahl == gesetzt) {
-        gewonnen = gewonnen + 6;
+function checkForWin() {
+    if (diceChoice == winningNumber) {
+        amountWon += 6;
         $('#statustext').addClass('text-success').removeClass('text-danger');
         $('#statustext').text("Gewonnen!");
-        $('#gewonnen').text(gewonnen + ".-");
-
-    } else if (gewinn_farbe == gesetzt) {
-        gewonnen = gewonnen + 3;
+        $('#gewonnen').text(amountWon + ".-");
+        
+    } else if (diceChoice == winningColor) {
+        amountWon += 3;
         $('#statustext').addClass('text-success').removeClass('text-danger');
         $('#statustext').text("Gewonnen!");
-        $('#gewonnen').text(gewonnen + ".-");
-
-    } else if (gewinn_gerade == gesetzt) {
-        gewonnen = gewonnen + 2;
+        $('#gewonnen').text(amountWon + ".-");
+        
+    } else if ((diceChoice == 10 && winningNumber % 2 == 0) ||
+               (diceChoice == 11 && winningNumber % 2 != 0)) {
+        amountWon += 2;
         $('#statustext').addClass('text-success').removeClass('text-danger');
         $('#statustext').text("Gewonnen!");
-        $('#gewonnen').text(gewonnen + ".-");
+        $('#gewonnen').text(amountWon + ".-");
+        
     } else {
-        verloren = verloren + 1;
+        amountLost += 1;
         $('#statustext').addClass('text-danger').removeClass('text-success');
         $('#statustext').text("Verloren!");
-        $('#verloren').text(verloren + ".-");
+        $('#verloren').text(amountLost + ".-");
+    }
+};
+
+
+function setDiceChoice(newChoice) {
+    // Update dice choice
+    switch (newChoice) {
+        case '1':
+            diceChoice = 1;
+            break;
+        case '2':
+            diceChoice = 2;
+            break;
+        case '3':
+            diceChoice = 3;
+            break;
+        case '4':
+            diceChoice = 4;
+            break;
+        case '5':
+            diceChoice = 5;
+            break;
+        case '6':
+            diceChoice = 6;
+            break;
+            
+        case 'Rot':
+            diceChoice = 7;
+            break;
+        case 'Lila':
+            diceChoice = 8;
+            break;
+        case 'Orange':
+            diceChoice = 9;
+            
+            break;
+        case 'Gerade':
+            diceChoice = 10;
+            break;
+        case 'Ungerade':
+            diceChoice = 11;
+            break;
+        default:
+            console.error("Encountered an unhandled bet choice");
     }
     
-    ajaxFunction();
-
+    // Update UI
+    $('#einsatz').text("Auf : " + newChoice);
+    
+    $("#play").removeAttr("disabled");
 };
 
-function setBet(value) {
 
-    setEinsatzvalue(value);
-    $('#einsatz').text("Auf : " + value);
-
-};
-
-function setGuthaben() {
-    if (Guthaben <= 0) {
-        alert("Guthaben fertig");
-    } else if (gesetzt == null) {
-
-    } else {
-        Guthaben = Guthaben - 1;
-        $('#guthaben').text(Guthaben + ".-")
-    }
-};
-
-function setEinsatzvalue(einsatz) {
-
-    switch (einsatz) {
-    case ('1'):
-        gesetzt = 1;
-        break;
-
-    case ('2'):
-        gesetzt = 2;
-        break;
-
-    case ('3'):
-        gesetzt = 3;
-        break;
-
-    case ('4'):
-        gesetzt = 4;
-        break;
-
-    case ('5'):
-        gesetzt = 5;
-        break;
-
-    case ('6'):
-        gesetzt = 6;
-        break;
-
-    case ('Rot'):
-        gesetzt = 7;
-        break;
-
-    case ('Lila'):
-        gesetzt = 8;
-        break;
-
-    case ('Orange'):
-        gesetzt = 9;
-        break;
-
-    case ('Gerade'):
-        gesetzt = 10;
-        break;
-
-    case ('Ungerade'):
-        gesetzt = 11;
-        break;
-    }
-
-};
-
-function ajaxFunction() {
-    var ajaxRequest; // The variable that makes Ajax possible!
-
-    try {
-        // Opera 8.0+, Firefox, Safari
-        ajaxRequest = new XMLHttpRequest();
-    } catch (e) {
-        // Internet Explorer Browsers
-        try {
-            ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
-        } catch (e) {
-            try {
-                ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
-            } catch (e) {
-                // Something went wrong
-                alert("Your browser broke!");
-                return false;
-            }
-        }
-    }
-    // Create a function that will receive data 
-    // sent from the server and will update
-    // div section in the same page.
-    ajaxRequest.onreadystatechange = function () {
-        if (ajaxRequest.readyState == 4) {
-            var ajaxDisplay = document.getElementById('ajaxDiv');
-            ajaxDisplay.innerHTML = ajaxRequest.responseText;
-        }
-    }
-    // Now get the value from user and pass it to
-    // server script.
-   
-    var queryValues = "?runde=" + runde + 
-        "&guthaben=" + Guthaben + 
-        "&gesetzt=" + gesetzt + 
-        "&gewinn_zahl=" + gewinn_zahl + 
-        "&gewinn_farbe=" + gewinn_farbe + 
-        "&gewinn_gerade=" + gewinn_gerade + 
-        "&verloren=" + verloren+ 
-        "&gewonnen=" + gewonnen+ 
-        "&player_id=" + player_id;
-    ajaxRequest.open("GET", "game_script.php" +
-        queryValues, true);
-    ajaxRequest.send(null);
+function sendRoundResultToServer() {
+    // Disable the play button, to prevent lost games because the unfinished
+    // AJAX request could get cancelled by the quickly started new game
+    $("#play").attr("disabled", "disabled");
+    
+    // Disable the bet button too, because changing it would
+    // re-enable the play button
+    $("#bet").attr("disabled", "disabled");
+    
+    
+    // Build HTTP parameter string
+    var playerId = $('#player_id').val();
+    
+    var httpParameters = "?runde=" + round + 
+      "&guthaben=" + credit + 
+      "&gesetzt=" + diceChoice + 
+      "&gewinn_zahl=" + winningNumber + 
+      "&gewinn_farbe=" + winningColor + 
+      "&verloren=" + amountLost + 
+      "&gewonnen=" + amountWon + 
+      "&player_id=" + playerId;
+    
+    // Send the round result to the server
+    $.ajax('game_script.php' + httpParameters)
+        .done(function (data) {
+            console.log("Round result successfully sent to server");
+        })
+        .error(function (xhr, status, error) {
+            console.error('Failed to send round result to server (' + status + '): ' + xhr.responseText);
+            
+            // TODO: Ask how to handle this kind of error
+            alert("Beim Übermitteln des Rundenergebnisses zum Server ist ein Fehler aufgetreten!\n" + 
+                  "Bitte überprüfen Sie Ihre Internetverbindung.");
+        })
+        .always (function () {
+            // Re-enable the play and bet buttons
+            $("#play").removeAttr("disabled");
+            $("#bet").removeAttr("disabled");
+        });
 }
