@@ -36,7 +36,7 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
+    <div class="wrapper container">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h1>Lea Berger - Maturitätsarbeit</h1>

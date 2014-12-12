@@ -24,7 +24,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <title>Umfrage | Maturitätsarbeit Lea Berger</title>
+    <title>Würfelspiel | Maturitätsarbeit Lea Berger</title>
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -32,9 +32,24 @@
     
     <!-- Style -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.0/paper/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container ">
+    <div class="container noscript">
+        <div class="row row-centered text-center">
+            <br />
+            <p class="text text-big">
+                JavaScript scheint ausgeschaltet zu sein
+            </p>
+            <p>
+                Diese Website benötigt JavaScript um korrekt funktionieren zu können.<br />
+                Bitte schalten Sie JavaScript an und <a href="." title="Seite aktualisieren">aktualisieren</a> Sie die Seite.
+            </p>
+        </div>
+    </div>
+    
+    <div class="wrapper container" style="display: none;">
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h1>Würfelspiel</h1>
@@ -144,5 +159,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
     
     <script type="text/javascript" src="js/game.js"></script>
+    <script type="text/javascript" src="js/noscript.js"></script>
 </body>
 </html>
