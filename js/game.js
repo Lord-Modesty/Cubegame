@@ -169,14 +169,13 @@ function sendRoundResultToServer() {
     // Build HTTP parameter string
     var playerId = $('#player_id').val();
     
-    var httpParameters = "?runde=" + round + 
-      "&guthaben=" + credit + 
-      "&gesetzt=" + diceChoice + 
-      "&gewinn_zahl=" + winningNumber + 
-      "&gewinn_farbe=" + winningColor + 
-      "&verloren=" + amountLost + 
-      "&gewonnen=" + amountWon + 
-      "&player_id=" + playerId;
+    var httpParameters = "?player_id=" + playerId +
+      "&runde=" + round +
+      "&restguthaben=" + credit +
+      "&gesetzt=" + diceChoice +
+      "&gewuerfelt=" + winningNumber +
+      "&menge_verloren=" + amountLost +
+      "&menge_gewonnen=" + amountWon;
     
     // Send the round result to the server
     $.ajax('game_script.php' + httpParameters)
