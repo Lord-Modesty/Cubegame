@@ -1,3 +1,4 @@
+// TODO: Consider the amount of rounds already played, increase session duration to at least multiple hours
 var round = 1;
 var credit = 10;
 
@@ -185,7 +186,7 @@ function sendRoundResultToServer() {
         .error(function (xhr, status, error) {
             console.error('Failed to send round result to server (' + status + '): ' + xhr.responseText);
             
-            // TODO: Ask how to handle this kind of error
+            // TODO: Roll back current round, so no round is lost
             alert("Beim Übermitteln des Rundenergebnisses zum Server ist ein Fehler aufgetreten!\n" + 
                   "Bitte überprüfen Sie Ihre Internetverbindung.");
         })
