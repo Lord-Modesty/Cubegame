@@ -39,23 +39,29 @@
     <div class="wrapper container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1>Vielen Dank!</h1>
+                <h1>Lea Berger - Maturitätsarbeit</h1>
+                <h2>Vielen Dank!</h2>
             </div>
         </div>
+        
         <br />
         <div class="row">
             <div class="col-lg-12 text-center">
-                <p class="text text-big">
-                    Glückwunsch, Sie haben <span class="label label-success"><?php echo $_SESSION['gewonnen'] ?>.-</span> Gewonnen!
-                </p>
+                <?php
+                    if ($_SESSION['gewonnen'] > 0) {
+                        echo '<p class="text text-big">' .
+                                 'Glückwunsch, Sie haben <span class="label label-success">' . $_SESSION['gewonnen'] . '.-</span> Gewonnen!' .
+                             '</p>';
+                    }
+                ?>
                 <p class="text text-medium">
-                    Ihre Resultate wurden gespeichert.
+                    Ihr Resultat wurden gespeichert.
                 </p>
             </div>
         </div>
     </div>
     
-    <footer class="footer container">
+    <footer>
         <br />
         <div class="text-center">
             <p class="text-muted">

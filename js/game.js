@@ -31,6 +31,7 @@ function rollTheDice() {
     winNumber = Math.floor((Math.random() * 6) + 1);
     
     // Update UI
+    $("#cube-title").removeClass('hidden');
     $("#cube").removeClass();
     $('#cube').text(winNumber);
     

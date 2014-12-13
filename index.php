@@ -40,6 +40,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h1>Lea Berger - Maturitätsarbeit</h1>
+                <h2>Registrierung</h2>
             </div>
         </div>
         
@@ -123,7 +124,7 @@
         </div>
     </div>
     
-    <footer class="footer container">
+    <footer>
         <br />
         <div class="text-center">
             <p class="text-muted">
