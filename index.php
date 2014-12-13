@@ -40,6 +40,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h1>Lea Berger - Maturitätsarbeit</h1>
+                <hr />
                 <h2>Registrierung</h2>
             </div>
         </div>

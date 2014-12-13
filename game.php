@@ -55,6 +55,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h1>Lea Berger - Maturitätsarbeit</h1>
+                <hr />
                 <h2>Würfelspiel</h2>
                 
                 <input id="player_id" type="hidden" name="UserBrowser" value="<?php echo $_SESSION['playerId'] ?>">
