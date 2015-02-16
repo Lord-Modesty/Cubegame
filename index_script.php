@@ -11,6 +11,20 @@
     $groesse = $_POST['groesse'];
     $hunger = $_POST['hunger'];
     
+    // Validate user input
+    function isParameterValid($parameter) {
+        return strlen(trim($parameter)) > 0;
+    }
+    
+    $isUserInputValid = isParameterValid($vorname) && isParameterValid($name) && isParameterValid($klasse) &&
+                        isParameterValid($geschlecht) && isParameterValid($age) && isParameterValid($gewicht) &&
+                        isParameterValid($groesse) && isParameterValid($hunger);
+    if (!$isUserInputValid) {
+        // A player with missing data isn't allowed to play
+        header('Location: index.php');
+        exit(0);
+    }
+    
     // Create a database connection
     $database = new mysqli('localhost', 'root', '', 'leabergermaturaarbeit') or
       exit('Fehler: Verbindung zur Datenbank konnte nicht hergestellt werden');

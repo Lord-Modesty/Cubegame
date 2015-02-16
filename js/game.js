@@ -1,3 +1,4 @@
+// TODO: Consider the amount of rounds already played, increase session duration to at least multiple hours
 var round = 1;
 var credit = 10;
 
@@ -31,6 +32,7 @@ function rollTheDice() {
     winNumber = Math.floor((Math.random() * 6) + 1);
     
     // Update UI
+    $("#cube-title").removeClass('hidden');
     $("#cube").removeClass();
     $('#cube').text(winNumber);
     
@@ -168,14 +170,13 @@ function sendRoundResultToServer() {
     // Build HTTP parameter string
     var playerId = $('#player_id').val();
     
-    var httpParameters = "?runde=" + round + 
-      "&guthaben=" + credit + 
-      "&gesetzt=" + diceChoice + 
-      "&gewinn_zahl=" + winningNumber + 
-      "&gewinn_farbe=" + winningColor + 
-      "&verloren=" + amountLost + 
-      "&gewonnen=" + amountWon + 
-      "&player_id=" + playerId;
+    var httpParameters = "?player_id=" + playerId +
+      "&runde=" + round +
+      "&restguthaben=" + credit +
+      "&gesetzt=" + diceChoice +
+      "&gewuerfelt=" + winningNumber +
+      "&menge_verloren=" + amountLost +
+      "&menge_gewonnen=" + amountWon;
     
     // Send the round result to the server
     $.ajax('game_script.php' + httpParameters)
@@ -185,7 +186,7 @@ function sendRoundResultToServer() {
         .error(function (xhr, status, error) {
             console.error('Failed to send round result to server (' + status + '): ' + xhr.responseText);
             
-            // TODO: Ask how to handle this kind of error
+            // TODO: Roll back current round, so no round is lost
             alert("Beim Übermitteln des Rundenergebnisses zum Server ist ein Fehler aufgetreten!\n" + 
                   "Bitte überprüfen Sie Ihre Internetverbindung.");
         })

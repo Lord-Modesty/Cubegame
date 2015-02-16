@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `leabergermaturaarbeit`.`players` (
   `gewicht` INT NOT NULL,
   `groesse` INT NOT NULL,
   `hunger` INT NOT NULL,
-  `zeitpunkt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `erstellt_am` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`player_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1;
@@ -35,12 +35,12 @@ CREATE TABLE IF NOT EXISTS `leabergermaturaarbeit`.`games` (
   `game_id` INT NOT NULL AUTO_INCREMENT,
   `player_id` INT NOT NULL,
   `runde` INT NOT NULL,
-  `guthaben` INT NOT NULL,
+  `restguthaben` INT NOT NULL,
   `gesetzt` INT NOT NULL,
-  `gewinn_zahl` INT NOT NULL,
-  `gewinn_farbe` INT NOT NULL,
-  `verloren` INT NOT NULL,
-  `gewonnen` INT NOT NULL,
+  `gewuerfelt` INT NOT NULL,
+  `menge_verloren` INT NOT NULL,
+  `menge_gewonnen` INT NOT NULL,
+  `erstellt_am` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`game_id`),
   INDEX `fk_games_players_idx` (`player_id` ASC),
   CONSTRAINT `fk_games_players`

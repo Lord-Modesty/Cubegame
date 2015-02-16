@@ -1,0 +1,8 @@
+# Deployments
+## Tuesday, 09.12.2014
+23:40 Setup of database
+23:50 Deploy of version 1.0.0
+
+## Thursday, 11.12.2014
+00:05 Deploy of version 1.0.1
+00:10 Complete reset of database (deleted 9 players with mostly invalid data)

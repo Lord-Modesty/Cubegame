@@ -32,25 +32,39 @@
     
     <!-- Style -->
     <link href="//cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.0/paper/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <section>
+    <div class="wrapper container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1>Vielen Dank!</h1>
+                <h1>Lea Berger - Maturitätsarbeit</h1>
+                <hr />
+                <h2>Vielen Dank!</h2>
             </div>
         </div>
+        
+        <br />
         <div class="row">
             <div class="col-lg-12 text-center">
-                <legend>
-                    <h1>Gewonnen: <span id="guthaben" class="label label-success"><?php echo $_SESSION['gewonnen'] ?>.-</span></h1></br>
-                </legend>
+                <?php
+                    if ($_SESSION['gewonnen'] > 0) {
+                        echo '<p class="text text-big">' .
+                                 'Glückwunsch, Sie haben <span class="label label-success">' . $_SESSION['gewonnen'] . '.-</span> Gewonnen!' .
+                             '</p>';
+                    }
+                ?>
+                <p class="text text-medium">
+                    Ihr Resultat wurden gespeichert.
+                </p>
             </div>
         </div>
-    </section>
+    </div>
     
-    <footer class="footer">
-        <div class="container text-center">
+    <footer>
+        <br />
+        <div class="text-center">
             <p class="text-muted">
                 Created by Nicola Bischof
             </p>
@@ -60,7 +74,5 @@
     <!-- Scripts -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js" type="text/javascript"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js" type="text/javascript"></script>
-    
-    <script type="text/javascript" src="game.js"></script>
 </body>
 </html>
